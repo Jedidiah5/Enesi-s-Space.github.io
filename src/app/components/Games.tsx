@@ -70,9 +70,10 @@ const JumpingBoxGame = () => {
 
   return (
     <div className="relative w-[600px] h-[200px] mx-auto bg-black/30 rounded-lg overflow-hidden border-2 border-custom-orange/50">
-      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 text-white text-xl font-semibold">
-        Press 'J' to Jump!
-      </div>
+    <div className="absolute top-4 left-1/2 transform -translate-x-1/2 text-white text-xl font-semibold">
+      Press &apos;J&apos; to Jump!
+    </div>
+
       <div className="absolute bottom-0 left-0 w-full h-2 bg-custom-orange/20" />
       <div
         ref={boxRef}
@@ -95,9 +96,9 @@ const JumpingBoxGame = () => {
       {gameOver && (
         <div className="absolute inset-0 flex items-center justify-center bg-black/50">
           <div className="text-center">
-            <h3 className="text-2xl text-white mb-4">Game Over!</h3>
-            <p className="text-custom-orange">Press 'J' to restart</p>
-            <p className="text-white mt-2">Final Score: {score}</p>
+          <h3 className="text-2xl text-white mb-4">Game Over!</h3>
+          <p className="text-custom-orange">Press &apos;J&apos; to restart</p>
+          <p className="text-white mt-2">Final Score: {score}</p>
           </div>
         </div>
       )}
@@ -338,7 +339,7 @@ const Games = () => {
             >
               <div className="bg-black/30 rounded-lg p-6 text-center border-2 border-custom-orange/50 hover:border-custom-orange transition-colors">
                 <h3 className="text-xl font-bold text-white mb-2">Jumping Box</h3>
-                <p className="text-gray-400">Press 'J' to jump over obstacles</p>
+                <p className="text-gray-400">Press &apos;J&apos; to jump over obstacles</p>
               </div>
             </motion.div>
             <motion.div
