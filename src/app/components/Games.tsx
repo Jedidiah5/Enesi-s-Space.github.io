@@ -26,7 +26,7 @@ const JumpingBoxGame = () => {
   }, [isJumping, gameOver]);
 
   useEffect(() => {
-    const handleKeyPress = (e) => {
+    const handleKeyPress = (e: KeyboardEvent) => {  // Explicitly define the type of e as KeyboardEvent
       if (e.code === 'KeyJ' && !isJumping && !gameOver) {
         jump();
       }
