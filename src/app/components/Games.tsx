@@ -1,14 +1,16 @@
 'use client';
 import { motion } from 'framer-motion';
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { useMemo } from 'react';
+
 
 // Game 1: Jumping Box Game
 const JumpingBoxGame = () => {
   const [score, setScore] = useState(0);
   const [isJumping, setIsJumping] = useState(false);
   const [gameOver, setGameOver] = useState(false);
-  const boxRef = useRef(null);
-  const obstacleRef = useRef(null);
+  const boxRef = useRef<HTMLDivElement | null>(null);
+  const obstacleRef = useRef<HTMLDivElement | null>(null);
 
   const jump = useCallback(() => {
     if (!isJumping && !gameOver) {
@@ -47,7 +49,7 @@ const JumpingBoxGame = () => {
       if (boxRef.current && obstacleRef.current) {
         const boxRect = boxRef.current.getBoundingClientRect();
         const obstacleRect = obstacleRef.current.getBoundingClientRect();
-
+      
         if (
           boxRect.right > obstacleRect.left &&
           boxRect.left < obstacleRect.right &&
@@ -196,7 +198,8 @@ const MemoryCardGame = () => {
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
 
-  const emojis = ['🎮', '🎲', '🎯', '🎨']; // 4 pairs of emojis
+
+  const emojis = useMemo(() => ['🎮', '🎲', '🎯', '🎨'], []);// 4 pairs of emojis
 
   useEffect(() => {
     const gameCards = [...emojis, ...emojis]
