@@ -1,32 +1,16 @@
 'use client';
-
 import { motion } from 'framer-motion';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 // Game 1: Jumping Box Game
 const JumpingBoxGame = () => {
   const [score, setScore] = useState(0);
   const [isJumping, setIsJumping] = useState(false);
   const [gameOver, setGameOver] = useState(false);
-  const boxRef = useRef<HTMLDivElement>(null);
-  const obstacleRef = useRef<HTMLDivElement>(null);
+  const boxRef = useRef(null);
+  const obstacleRef = useRef(null);
 
-  useEffect(() => {
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.code === 'KeyJ' && !isJumping && !gameOver) {
-        jump();
-      }
-      if (gameOver && e.code === 'KeyJ') {
-        setGameOver(false);
-        setScore(0);
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [isJumping, gameOver]);
-
-  const jump = () => {
+  const jump = useCallback(() => {
     if (!isJumping && !gameOver) {
       setIsJumping(true);
       if (boxRef.current) {
@@ -39,7 +23,22 @@ const JumpingBoxGame = () => {
         }, 500);
       }
     }
-  };
+  }, [isJumping, gameOver]);
+
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.code === 'KeyJ' && !isJumping && !gameOver) {
+        jump();
+      }
+      if (gameOver && e.code === 'KeyJ') {
+        setGameOver(false);
+        setScore(0);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [jump, isJumping, gameOver]);
 
   useEffect(() => {
     if (gameOver) return;
@@ -48,7 +47,7 @@ const JumpingBoxGame = () => {
       if (boxRef.current && obstacleRef.current) {
         const boxRect = boxRef.current.getBoundingClientRect();
         const obstacleRect = obstacleRef.current.getBoundingClientRect();
-        
+
         if (
           boxRect.right > obstacleRect.left &&
           boxRect.left < obstacleRect.right &&
@@ -61,7 +60,7 @@ const JumpingBoxGame = () => {
 
     const scoreInterval = setInterval(() => {
       if (!gameOver) {
-        setScore(prev => prev + 1);
+        setScore((prev) => prev + 1);
         checkCollision();
       }
     }, 100);
@@ -92,9 +91,7 @@ const JumpingBoxGame = () => {
           animation: gameOver ? 'none' : 'moveObstacle 2s linear infinite'
         }}
       />
-      <div className="absolute top-4 right-4 text-white text-xl">
-        Score: {score}
-      </div>
+      <div className="absolute top-4 right-4 text-white text-xl">Score: {score}</div>
       {gameOver && (
         <div className="absolute inset-0 flex items-center justify-center bg-black/50">
           <div className="text-center">
@@ -312,8 +309,11 @@ const Games = () => {
   };
 
   return (
-    <section id="games" className="py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="games" className="py-20 bg-black relative overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-custom-orange/10 to-transparent" />
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
