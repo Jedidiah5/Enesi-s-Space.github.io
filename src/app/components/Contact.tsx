@@ -25,7 +25,7 @@ const socialLinks = [
 
 const Contact = () => {
   return (
-    <section id="contact" className="py-20 bg-black/50">
+    <section id="contact" className="py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -54,11 +54,11 @@ const Contact = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
               viewport={{ once: true }}
-              className="bg-black/30 rounded-lg p-6 text-center border-2 border-custom-orange/50 hover:border-custom-orange transition-colors"
+              className="bg-black/30 rounded-lg p-6 text-center border-2 border-custom-orange/50 hover:border-custom-orange hover:bg-custom-orange transition-all duration-300 hover:shadow-xl group"
             >
-              <div className="text-4xl mb-4">{link.icon}</div>
-              <h3 className="text-xl font-bold text-white mb-2">{link.name}</h3>
-              <p className="text-gray-400">{link.description}</p>
+              <div className="text-4xl mb-4 transition-transform duration-300 group-hover:scale-110">{link.icon}</div>
+              <h3 className="text-xl font-bold text-white mb-2 transition-colors duration-300 group-hover:text-white">{link.name}</h3>
+              <p className="text-gray-400 transition-colors duration-300 group-hover:text-white/90">{link.description}</p>
             </motion.a>
           ))}
         </div>

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Poppins } from 'next/font/google';
 import './globals.css';
+import AnimationWrapper from './components/AnimationWrapper';
 
 const inter = Inter({ subsets: ['latin'] });
 const poppins = Poppins({ 
@@ -11,21 +12,29 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: 'ENESE - Portfolio',
-  description: 'Welcome to my portfolio website showcasing my projects and skills.',
+  title: 'Enesi\'s Space',
+  description: 'Welcome to my portfolio website',
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="en" className={`scroll-smooth ${poppins.variable}`}>
       <head>
         <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet"/>
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} bg-black min-h-screen`} suppressHydrationWarning>
+        {/* Background gradient */}
+        <div className="fixed inset-0 bg-gradient-to-b from-custom-orange/10 to-transparent pointer-events-none z-0" />
+        <div className="relative z-10">
+          <AnimationWrapper>
+            {children}
+          </AnimationWrapper>
+        </div>
+      </body>
     </html>
   );
 }

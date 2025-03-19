@@ -2,12 +2,30 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const navItems = ['Home', 'About', 'Projects', 'Games', 'Contact'];
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('Home');
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = navItems.map(item => document.getElementById(item.toLowerCase()));
+      const scrollPosition = window.scrollY + 100;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        if (sections[i] && sections[i].offsetTop <= scrollPosition) {
+          setActiveSection(navItems[i]);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <motion.nav
@@ -15,13 +33,13 @@ const Navbar = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
       className="fixed w-full top-0 z-50 shadow-lg font-poppins"
-      style={{ backgroundColor: '#8a3224' }}
+      style={{ backgroundColor: 'transparent', backdropFilter: 'blur(10px)' }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/" className="text-2xl font-bold text-white hover:text-white/90 transition-colors">
+            <Link href="/" className="text-2xl font-bold text-white hover:text-white/90 transition-all duration-300 hover:scale-105">
               ENESI
             </Link>
           </div>
@@ -34,9 +52,18 @@ const Navbar = () => {
                   key={item}
                   href={`#${item.toLowerCase()}`}
                   whileHover={{ scale: 1.1 }}
-                  className="text-white hover:text-white/90 transition-colors font-medium"
+                  className={`transition-all duration-300 relative group ${
+                    activeSection === item 
+                      ? 'text-custom-orange' 
+                      : 'text-white hover:text-custom-orange'
+                  }`}
                 >
                   {item}
+                  <span className={`absolute bottom-0 left-0 h-0.5 transition-all duration-300 ${
+                    activeSection === item 
+                      ? 'w-full bg-custom-orange' 
+                      : 'w-0 bg-custom-orange group-hover:w-full'
+                  }`}></span>
                 </motion.a>
               ))}
             </div>
@@ -46,7 +73,7 @@ const Navbar = () => {
           <div className="sm:hidden">
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-white hover:text-white/90 p-2"
+              className="text-white hover:text-custom-orange p-2 transition-all duration-300 hover:scale-110"
             >
               <svg
                 className="h-6 w-6"
@@ -78,7 +105,11 @@ const Navbar = () => {
                   key={item}
                   href={`#${item.toLowerCase()}`}
                   whileHover={{ scale: 1.05 }}
-                  className="text-white hover:text-white/90 transition-colors block px-3 py-2 text-center font-medium"
+                  className={`block px-3 py-2 text-center font-medium transition-all duration-300 ${
+                    activeSection === item 
+                      ? 'text-custom-orange' 
+                      : 'text-white hover:text-custom-orange'
+                  }`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item}
