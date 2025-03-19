@@ -14,10 +14,10 @@ const JumpingBoxGame = () => {
     if (!isJumping && !gameOver) {
       setIsJumping(true);
       if (boxRef.current) {
-        boxRef.current.style.bottom = '100px';
+        (boxRef.current as HTMLDivElement).style.bottom = '100px';
         setTimeout(() => {
           if (boxRef.current) {
-            boxRef.current.style.bottom = '0px';
+            (boxRef.current as HTMLDivElement).style.bottom = '0px';
             setIsJumping(false);
           }
         }, 500);
@@ -208,7 +208,7 @@ const MemoryCardGame = () => {
         isMatched: false
       }));
     setCards(gameCards);
-  }, []);
+  }, [emojis]);
 
   const handleCardClick = (id: number) => {
     if (flippedCards.length === 2 || cards[id].isFlipped || cards[id].isMatched) return;
