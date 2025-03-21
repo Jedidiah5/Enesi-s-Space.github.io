@@ -20,7 +20,7 @@ const projects: Project[] = [
   {
     title: "Store Management System",
     description: "I worked on this project as the frontend developer with my team to manage the store inventory and sales for strores.",
-    images: ["/StoreSystem1.jpg", "/StoreSystem2.jpg", "/StoreSystem3.jpg", "/StoreSystem4.jpg", "/StoreSystem5.jpg"],
+    images: ["/StoreSystem3.jpg", "/StoreSystem4.jpg", "/StoreSystem5.jpg", "/StoreSystem1.jpg", "/StoreSystem2.jpg"],
     technologies: ["Html", "CSS", "Javascript", "Firebase"],
     github: "https://github.com/Jedidiah5/storeManagementSystem",
     liveSite: "",

@@ -9,7 +9,9 @@ const frontendSkills = [
   "Tailwind CSS",
   "HTML5",
   "Responsive Design",
-  "Next.js"
+  "Next.js",
+  "Node.js",
+  "Angular"
 ];
 
 const About = () => {
