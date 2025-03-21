@@ -51,7 +51,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/" className="text-2xl font-bold text-white hover:text-white/90 transition-all duration-300 hover:scale-105">
+            <Link href="/" className="text-2xl font-bold text-custom-orange hover:text-white/90 transition-all duration-300 hover:scale-105">
               ENESI
             </Link>
           </div>
