@@ -23,6 +23,7 @@ const nextConfig = {
     ],
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    domains: ['localhost', 'enesi-s-space.vercel.app'],
   },
   async rewrites() {
     return [
