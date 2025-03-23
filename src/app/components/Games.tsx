@@ -9,8 +9,8 @@ const JumpingBoxGame = () => {
   const [score, setScore] = useState(0);
   const [isJumping, setIsJumping] = useState(false);
   const [gameOver, setGameOver] = useState(false);
-  const boxRef = useRef<HTMLDivElement | null>(null);
-  const obstacleRef = useRef<HTMLDivElement | null>(null);
+  const boxRef = useRef<HTMLDivElement>(null);
+  const obstacleRef = useRef<HTMLDivElement>(null);
 
   const jump = useCallback(() => {
     if (!isJumping && !gameOver) {
@@ -313,34 +313,31 @@ const Games = () => {
   };
 
   return (
-    <section id="games" className="py-20 bg-black relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-custom-orange/10 to-transparent" />
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="games" className="min-h-screen relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-custom-gray mb-4">
             Interactive <span className="text-custom-orange">Games</span>
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <p className="text-custom-gray-light/80 max-w-2xl mx-auto mb-16">
             Try out these fun games built with JavaScript and CSS animations
           </p>
         </motion.div>
 
         {selectedGame === null ? (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <motion.div
               whileHover={{ scale: 1.05 }}
               className="cursor-pointer"
               onClick={() => setSelectedGame(0)}
             >
-              <div className="bg-black/30 rounded-lg p-6 text-center border-2 border-custom-orange/50 hover:border-custom-orange transition-colors">
+              <div className="bg-black/30 backdrop-blur-sm rounded-lg p-6 text-center border-2 border-custom-orange/50 hover:border-custom-orange transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,165,0,0.3)]">
                 <h3 className="text-xl font-bold text-white mb-2">Jumping Box</h3>
                 <p className="text-gray-400">Press &apos;J&apos; to jump over obstacles</p>
               </div>
@@ -350,7 +347,7 @@ const Games = () => {
               className="cursor-pointer"
               onClick={() => setSelectedGame(1)}
             >
-              <div className="bg-black/30 rounded-lg p-6 text-center border-2 border-custom-orange/50 hover:border-custom-orange transition-colors">
+              <div className="bg-black/30 backdrop-blur-sm rounded-lg p-6 text-center border-2 border-custom-orange/50 hover:border-custom-orange transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,165,0,0.3)]">
                 <h3 className="text-xl font-bold text-white mb-2">Color Matching</h3>
                 <p className="text-gray-400">Match the target color from options</p>
               </div>
@@ -360,22 +357,22 @@ const Games = () => {
               className="cursor-pointer"
               onClick={() => setSelectedGame(2)}
             >
-              <div className="bg-black/30 rounded-lg p-6 text-center border-2 border-custom-orange/50 hover:border-custom-orange transition-colors">
+              <div className="bg-black/30 backdrop-blur-sm rounded-lg p-6 text-center border-2 border-custom-orange/50 hover:border-custom-orange transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,165,0,0.3)]">
                 <h3 className="text-xl font-bold text-white mb-2">Memory Cards</h3>
                 <p className="text-gray-400">Match pairs of emoji cards</p>
               </div>
             </motion.div>
           </div>
         ) : (
-          <div className="relative">
+          <div className="relative max-w-5xl mx-auto">
             <motion.button
               whileHover={{ scale: 1.05 }}
               onClick={handleBackToGames}
-              className="absolute top-4 left-4 bg-custom-orange/20 text-custom-orange px-4 py-2 rounded-lg hover:bg-custom-orange/30 transition-colors flex items-center gap-2 border border-custom-orange/30 z-50"
+              className="absolute -top-4 left-0 bg-custom-orange/20 text-custom-orange px-4 py-2 rounded-lg hover:bg-custom-orange/30 transition-all duration-300 flex items-center gap-2 border border-custom-orange/30 hover:shadow-[0_0_15px_rgba(255,165,0,0.2)]"
             >
               <span>←</span> Back to Games
             </motion.button>
-            <div className="mt-8">
+            <div className="mt-12">
               {selectedGame === 0 && <JumpingBoxGame />}
               {selectedGame === 1 && <ColorMatchingGame />}
               {selectedGame === 2 && <MemoryCardGame />}

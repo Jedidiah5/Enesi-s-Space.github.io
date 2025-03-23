@@ -175,6 +175,9 @@ const Projects = () => {
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      priority={projectIndex === 0}
+                      quality={75}
+                      unoptimized
                     />
                     <div className="absolute inset-0 bg-gradient-to-br from-custom-purple/20 to-transparent z-10" />
                     
