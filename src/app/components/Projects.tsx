@@ -18,12 +18,12 @@ interface Project {
 // Example projects data - you can replace this with your actual projects
 const projects: Project[] = [
   {
-    title: "Store Management System",
-    description: "I worked on this project as the frontend developer with my team to manage the store inventory and sales for strores.",
-    images: ["/StoreSystem3.jpg", "/StoreSystem4.jpg", "/StoreSystem5.jpg", "/StoreSystem1.jpg", "/StoreSystem2.jpg"],
-    technologies: ["Html", "CSS", "Javascript", "Firebase"],
-    github: "https://github.com/Jedidiah5/storeManagementSystem",
-    liveSite: "",
+    title: "Clotify",
+    description: "A modern e-commerce platform for clothing with a sleek user interface, shopping cart functionality, and product filtering.",
+    images: ["/images/clotify1.png", "/images/clotify2.png", "/images/clotify3.png"],
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "React"],
+    github: "https://github.com/Jedidiah5/Clotify",
+    liveSite: "https://clotify.vercel.app",
     type: "image"
   },
   {
@@ -38,7 +38,7 @@ const projects: Project[] = [
   {
     title: "Bidspirit-Auction",
     description: "Using basic html, css and javascript, i created an auction platform that allows users to bid on items and also buy items.",
-    images: ["/bidspirit-auction.jpg", "/Bidspirit2.png", "/Bidspirit3.png", "/Bidspirit4.jpg", "/Bidspirit5.jpg"],
+    images: ["/images/bidspirit-auction.jpg", "/images/Bidspirit2.png", "/images/Bidspirit3.png", "/images/Bidspirit4.jpg", "/images/Bidspirit5.jpg"],
     technologies: ["CSS", "Html", "Javascript"],
     github: "https://github.com/Jedidiah5/Bidspirit-Auction",
     liveSite: "https://bidspirit-auction.vercel.app/",

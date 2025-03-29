@@ -35,7 +35,7 @@ const Hero = () => {
             className="flex justify-center gap-4"
           >
             <a
-              href="https://drive.google.com/file/d/1HfLqsSUD7-pIrprrL2SbP1faF740lDd1/view?usp=drive_link"
+              href="https://drive.google.com/file/d/1HfLqsSUD7-pIrprrL2SbP1faF740lDd1/view?usp=sharing"
               className="bg-custom-orange text-white px-8 py-3 rounded-full font-medium hover:bg-custom-orange/90 transition-colors"
             >
               Resume
