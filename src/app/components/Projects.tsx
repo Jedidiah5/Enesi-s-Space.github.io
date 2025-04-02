@@ -1,8 +1,15 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useState, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import { useState, useRef, useCallback, useEffect } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import type { Swiper as SwiperType } from 'swiper';
+import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 interface Project {
   title: string;
@@ -44,86 +51,46 @@ const projects: Project[] = [
     liveSite: "https://bidspirit-auction.vercel.app/",
     type: "image"
   },
+  {
+    title: "ElevateBiz",
+    description: "A premium web template designed to help business create strong online presence effortlessly",
+    images: ["/images/image.png"],
+    technologies: ["React", "Next.js", "Tailwind CSS", "TypeScript"],
+    github: "https://github.com/Jedidiah5/task-manager",
+    liveSite: "https://task-manager-pro.vercel.app",
+    type: "image"
+  }
+  // {
+  //   title: "AI Chat Assistant",
+  //   description: "A real-time chat application powered by AI that provides intelligent responses and code suggestions for developers.",
+  //   images: ["/images/clotify1.png"],
+  //   technologies: ["OpenAI API", "Next.js", "TypeScript", "WebSocket"],
+  //   github: "https://github.com/Jedidiah5/ai-chat",
+  //   liveSite: "https://ai-chat-assistant.vercel.app",
+  //   type: "image"
+  // }
+
 ];
 
 const Projects = () => {
-  const [currentImageIndexes, setCurrentImageIndexes] = useState(projects.map(() => 0));
+  const [activeIndex, setActiveIndex] = useState(0);
+  const swiperRef = useRef<SwiperType>();
   const videoRef = useRef<HTMLVideoElement>(null);
-  const playTimeoutRef = useRef<NodeJS.Timeout>();
 
-  const handlePrevImage = (projectIndex: number) => {
-    setCurrentImageIndexes(prevIndexes => {
-      const newIndexes = [...prevIndexes];
-      const project = projects[projectIndex];
-      if (project.type === 'image' && project.images) {
-        newIndexes[projectIndex] = (newIndexes[projectIndex] - 1 + project.images.length) % project.images.length;
-      }
-      return newIndexes;
-    });
-  };
-
-  const handleNextImage = (projectIndex: number) => {
-    setCurrentImageIndexes(prevIndexes => {
-      const newIndexes = [...prevIndexes];
-      const project = projects[projectIndex];
-      if (project.type === 'image' && project.images) {
-        newIndexes[projectIndex] = (newIndexes[projectIndex] + 1) % project.images.length;
-      }
-      return newIndexes;
-    });
-  };
-
-  const handleVideoHover = useCallback((isHovering: boolean) => {
+  const handleVideoHover = (isHovering: boolean) => {
     if (!videoRef.current) return;
 
-    // Clear any existing timeout
-    if (playTimeoutRef.current) {
-      clearTimeout(playTimeoutRef.current);
-    }
-
     if (isHovering) {
-      // Add a small delay before playing to prevent race conditions
-      playTimeoutRef.current = setTimeout(() => {
-        if (videoRef.current) {
-          // Ensure video is loaded before playing
-          if (videoRef.current.readyState >= 2) {
-            videoRef.current.play().catch(error => {
-              // Ignore AbortError as it's expected when quickly hovering
-              if (error.name !== 'AbortError') {
-                console.error('Error playing video:', error);
-              }
-            });
-          } else {
-            // If video isn't loaded yet, wait for it to load
-            videoRef.current.addEventListener('loadeddata', () => {
-              videoRef.current?.play().catch(error => {
-                if (error.name !== 'AbortError') {
-                  console.error('Error playing video:', error);
-                }
-              });
-            }, { once: true });
-          }
-        }
-      }, 50);
+      videoRef.current.play().catch(() => {});
     } else {
-      // Pause and reset immediately
       videoRef.current.pause();
       videoRef.current.currentTime = 0;
     }
-  }, []);
-
-  // Cleanup timeout on unmount
-  useEffect(() => {
-    return () => {
-      if (playTimeoutRef.current) {
-        clearTimeout(playTimeoutRef.current);
-      }
-    };
-  }, []);
+  };
 
   return (
-    <section id="projects" className="py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="projects" className="py-20 bg-black overflow-hidden">
+      <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -139,103 +106,164 @@ const Projects = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, projectIndex) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: projectIndex * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-custom-blue/10 border border-custom-purple/20 rounded-lg overflow-hidden hover:border-custom-gold/40 transition-all duration-300 hover:shadow-xl hover:scale-[1.02]"
-            >
-              <div 
-                className="aspect-video relative overflow-hidden group"
-                onMouseEnter={() => project.type === 'video' && handleVideoHover(true)}
-                onMouseLeave={() => project.type === 'video' && handleVideoHover(false)}
-              >
-                {project.type === 'video' ? (
-                  <video
-                    ref={videoRef}
-                    className="w-full h-full object-cover"
-                    muted
-                    loop
-                    playsInline
-                    preload="auto"
-                    style={{ pointerEvents: 'none' }}
-                  >
-                    <source src={project.video} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                ) : (
-                  <>
-                    <Image
-                      src={project.images![currentImageIndexes[projectIndex]]}
-                      alt={`${project.title} - Image ${currentImageIndexes[projectIndex] + 1}`}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      priority={projectIndex === 0}
-                      unoptimized
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-br from-custom-purple/20 to-transparent z-10" />
-                    
-                    {/* Navigation Arrows */}
-                    <button
-                      onClick={() => handlePrevImage(projectIndex)}
-                      className="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-custom-blue/50 text-custom-gray p-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-custom-gold hover:text-custom-dark hover:scale-110"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                      </svg>
-                    </button>
-                    <button
-                      onClick={() => handleNextImage(projectIndex)}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-custom-blue/50 text-custom-gray p-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-custom-gold hover:text-custom-dark hover:scale-110"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </button>
+        <div className="relative w-full max-w-[1800px] mx-auto">
+          <style jsx global>{`
+            .swiper-container {
+              overflow: visible !important;
+              padding: 0 10px;
+              @media (min-width: 768px) {
+                padding: 0 100px;
+              }
+            }
+            .swiper-wrapper {
+              align-items: center;
+              padding: 10px 0;
+              @media (min-width: 768px) {
+                padding: 20px 0;
+              }
+            }
+            .swiper-slide {
+              transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+              transform: scale(0.75) translateY(50px);
+              opacity: 0.65;
+              cursor: pointer;
+              display: flex;
+              justify-content: center;
+              filter: brightness(0.7) blur(1px);
+              width: 100% !important;
+              max-width: 660px;
+              position: relative;
+              z-index: 1;
+              @media (max-width: 768px) {
+                max-width: 100%;
+                transform: scale(0.9) translateY(30px);
+              }
+            }
+            .swiper-slide-active {
+              transform: scale(1) translateY(0);
+              opacity: 1;
+              z-index: 3;
+              filter: brightness(1) blur(0);
+            }
+            .swiper-slide-prev {
+              transform: scale(0.75) translateY(50px) translateX(50%);
+              z-index: 2;
+            }
+            .swiper-slide-next {
+              transform: scale(0.75) translateY(50px) translateX(-50%);
+              z-index: 2;
+            }
+            .swiper-pagination {
+              position: relative;
+              bottom: -20px !important;
+            }
+            .swiper-pagination-bullet {
+              background: var(--custom-orange);
+              opacity: 0.5;
+            }
+            .swiper-pagination-bullet-active {
+              background: var(--custom-orange);
+              opacity: 1;
+            }
+            .swiper-button-prev,
+            .swiper-button-next {
+              display: none !important;
+            }
+          `}</style>
 
-                    {/* Image Indicators */}
-                    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-20 flex gap-1">
-                      {project.images!.map((_, index) => (
-                        <div
-                          key={index}
-                          className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-                            index === currentImageIndexes[projectIndex]
-                              ? 'bg-custom-gold'
-                              : 'bg-custom-gray/50'
-                          }`}
-                        />
-                      ))}
-                    </div>
-                  </>
-                )}
-              </div>
-              
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-custom-gray mb-2">{project.title}</h3>
-                <p className="text-custom-gray-light/80 mb-4">{project.description}</p>
-                
-                <div className="flex flex-wrap gap-2 mb-4">
+          <Swiper
+            effect={"coverflow"}
+            grabCursor={true}
+            centeredSlides={true}
+            slidesPerView={"auto"}
+            initialSlide={activeIndex}
+            loop={true}
+            speed={800}
+            coverflowEffect={{
+              rotate: 0,
+              stretch: 0,
+              depth: 100,
+              modifier: 2,
+              slideShadows: false
+            }}
+            pagination={{
+              clickable: true,
+              dynamicBullets: true
+            }}
+            breakpoints={{
+              320: {
+                slidesPerView: 1,
+                spaceBetween: 20
+              },
+              640: {
+                slidesPerView: "auto",
+                spaceBetween: -50
+              },
+              768: {
+                slidesPerView: "auto",
+                spaceBetween: -100
+              }
+            }}
+            modules={[EffectCoverflow, Pagination]}
+            onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+            }}
+            className="w-full pb-12"
+          >
+            {projects.map((project, index) => (
+              <SwiperSlide 
+                key={project.title}
+                className="!w-full md:!w-[660px] cursor-pointer"
+                onClick={() => {
+                  if (index !== activeIndex) {
+                    swiperRef.current?.slideToLoop(index);
+                  }
+                }}
+              >
+                <motion.div
+                  className="relative bg-custom-blue/10 rounded-[11.7px] overflow-hidden w-full border-2 border-custom-orange shadow-lg"
+                  animate={{ 
+                    scale: index === activeIndex ? 1 : 0.75,
+                    opacity: index === activeIndex ? 1 : 0.65,
+                    y: index === activeIndex ? 0 : 50,
+                  }}
+                  whileHover={{
+                    scale: index === activeIndex ? 1 : 0.8,
+                    opacity: index === activeIndex ? 1 : 0.8,
+                    transition: { duration: 0.3 }
+                  }}
+                  transition={{ duration: 0.6 }}
+                >
+                  {/* Content Container */}
+                  <div className="p-4 md:p-6">
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2 }}
+                      className="mb-4 text-center"
+                    >
+                      <h3 className="text-xl font-bold text-custom-gray mb-3">{project.title}</h3>
+                      <p className="text-custom-gray-light/80 text-sm">{project.description}</p>
+                    </motion.div>
+
+                    <div className="flex flex-wrap gap-2 mb-4 justify-center">
                   {project.technologies.map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1 bg-custom-purple/10 text-custom-orange rounded-full text-sm transition-all duration-300 hover:bg-custom-purple/20 hover:scale-105"
+                          className="px-2 py-1 bg-custom-purple/10 text-custom-orange rounded-full text-xs"
                     >
                       {tech}
                     </span>
                   ))}
                 </div>
                 
-                <div className="flex justify-center gap-4">
+                    <div className="flex gap-3 justify-center">
                   <a
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-1/2 bg-custom-orange text-custom-dark px-4 py-2 rounded-lg text-center border-2 border-custom-orange hover:bg-custom-dark hover:text-white hover:border-custom-orange transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                        className="px-4 bg-custom-orange text-custom-dark py-1 rounded-lg text-center border border-custom-orange hover:bg-custom-dark hover:text-white transition-all duration-300 text-xs"
                   >
                     GitHub
                   </a>
@@ -243,14 +271,43 @@ const Projects = () => {
                     href={project.liveSite}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-1/2 bg-custom-dark text-custom-gray px-4 py-2 rounded-lg text-center border-2 border-custom-orange hover:bg-custom-orange hover:text-custom-dark transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                        className="px-4 bg-custom-dark text-custom-gray py-1 rounded-lg text-center border border-custom-orange hover:bg-custom-orange hover:text-custom-dark transition-all duration-300 text-xs"
                   >
                     Live Site
                   </a>
                 </div>
               </div>
+
+                  {/* Image/Video Container */}
+                  <div className="relative h-[200px] md:h-[300px] w-full overflow-hidden">
+                    {project.type === 'video' ? (
+                      <video
+                        ref={videoRef}
+                        className="w-full h-full object-cover"
+                        muted
+                        loop
+                        playsInline
+                        preload="auto"
+                        onMouseEnter={() => handleVideoHover(true)}
+                        onMouseLeave={() => handleVideoHover(false)}
+                      >
+                        <source src={project.video} type="video/mp4" />
+                      </video>
+                    ) : (
+                      <Image
+                        src={project.images![0]}
+                        alt={project.title}
+                        fill
+                        className="object-cover"
+                        priority={index === 0}
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+              </div>
             </motion.div>
+              </SwiperSlide>
           ))}
+          </Swiper>
         </div>
       </div>
     </section>
