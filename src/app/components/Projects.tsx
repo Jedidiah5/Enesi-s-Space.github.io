@@ -56,8 +56,8 @@ const projects: Project[] = [
     description: "A premium web template designed to help business create strong online presence effortlessly",
     images: ["/images/image.png"],
     technologies: ["React", "Next.js", "Tailwind CSS", "TypeScript"],
-    github: "https://github.com/Jedidiah5/task-manager",
-    liveSite: "https://task-manager-pro.vercel.app",
+    github: "https://github.com/Jedidiah5/ElevateBiz",
+    liveSite: "https://elevate-biz-omega.vercel.app/",
     type: "image"
   }
   // {
