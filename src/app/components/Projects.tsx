@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
@@ -21,7 +21,7 @@ interface Project {
   images?: string[];
   video?: string;
   github: string;
-  liveSite: string;
+  liveSite?: string;
 }
 
 const projects: Project[] = [
@@ -38,6 +38,17 @@ const projects: Project[] = [
   //   type: "image"
   // },
   {
+    title: "Store Management System",
+    subtitle: "Inventory & Sales Management Application",
+    goal: "Create a comprehensive system for managing store inventory, sales tracking, and employee management.",
+    role: "Developed the front end of the application with real-time updates.",
+    technologies: ["Html", "Css", "JavaScript", "Firebase"],
+    outcome: "Still in development",
+    images: ["/images/StoreSystem1.jpg"],
+    github: "https://github.com/Jedidiah5/storeManagementSystem",
+    type: "image"
+  },
+  {
     title: "Clotify",
     subtitle: "Clothing E-commerce Site",
     goal: "Create a stylish online shop with cart, checkout, and admin dashboard.",
@@ -47,6 +58,18 @@ const projects: Project[] = [
     images: ["/images/clotify2.png"],
     github: "https://github.com/Jedidiah5/Clotify",
     liveSite: "https://clotify.vercel.app/",
+    type: "image"
+  },
+  {
+    title: "ElevateBiz",
+    subtitle: "A modern business site template to build an online presence with customizable features.",
+    goal: "Create a  modern template for businessesto build an online presence with customizable features.",
+    role: "Built complete frontend.",
+    technologies: ["Next.js", "Typescript", "TailwindCSS", "React"],
+    outcome: "Already active on Vercel",
+    images: ["/images/image.png"],
+    github: "https://github.com/Jedidiah5/ElevateBiz",
+    liveSite: "https://elevate-biz-omega.vercel.app/",
     type: "image"
   },
   {
@@ -80,7 +103,11 @@ const techIcons: { [key: string]: string } = {
 };
 
 const Projects = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const clotifyIndex = projects.findIndex(p => p.title === "Clotify");
+  const initialIndex = clotifyIndex !== -1 ? clotifyIndex : 0; // Default to 0 if not found
+
+  const [activeIndex, setActiveIndex] = useState(initialIndex);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const swiperRef = useRef<SwiperType>();
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -93,6 +120,10 @@ const Projects = () => {
       videoRef.current.pause();
       videoRef.current.currentTime = 0;
     }
+  };
+
+  const closeModal = () => {
+    setSelectedImage(null);
   };
 
   return (
@@ -143,13 +174,27 @@ const Projects = () => {
               transform: scale(0.75) translateY(50px) translateX(-50%);
               z-index: 2;
             }
+            .swiper-pagination {
+              position: static !important;
+              margin-top: 2rem;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 8px;
+            }
             .swiper-pagination-bullet {
-              background: var(--custom-orange);
+              width: 8px !important;
+              height: 8px !important;
+              background-color: #FF5733 !important;
               opacity: 0.5;
+              transition: all 0.3s ease;
+              margin: 0 !important;
             }
             .swiper-pagination-bullet-active {
-              background: var(--custom-orange);
               opacity: 1;
+              width: 24px !important;
+              border-radius: 4px;
+              background-color: #FF5733 !important;
             }
             @media (max-width: 640px) {
               .swiper-slide {
@@ -170,7 +215,7 @@ const Projects = () => {
             grabCursor={true}
             centeredSlides={true}
             slidesPerView={"auto"}
-            initialSlide={activeIndex}
+            initialSlide={initialIndex}
             loop={true}
             speed={800}
             coverflowEffect={{
@@ -181,15 +226,18 @@ const Projects = () => {
               slideShadows: false
             }}
             pagination={{
+              el: '.swiper-pagination',
               clickable: true,
-              dynamicBullets: true
+              type: 'bullets',
+              bulletActiveClass: 'swiper-pagination-bullet-active',
+              bulletClass: 'swiper-pagination-bullet',
             }}
             modules={[EffectCoverflow, Pagination]}
             onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
             }}
-            className="w-full pb-12"
+            className="w-full pb-16"
           >
             {projects.map((project, index) => (
               <SwiperSlide 
@@ -215,99 +263,162 @@ const Projects = () => {
                   }}
                   transition={{ duration: 0.6 }}
                 >
-                  {/* Content Container */}
-                  <div className="p-4 sm:p-6">
-                    <div className="mb-4 sm:mb-6">
-                      <h3 className="text-xl sm:text-2xl font-bold text-white mb-1">{project.title}</h3>
-                      <p className="text-custom-orange text-xs sm:text-sm mb-3 sm:mb-4">{project.subtitle}</p>
-                      
-                      <div className="space-y-3 sm:space-y-4 text-xs sm:text-sm">
-                        <div>
-                          <h4 className="text-custom-orange font-semibold mb-1">Goal</h4>
-                          <p className="text-gray-300">{project.goal}</p>
-                        </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {/* Content Container (Left Column) */}
+                    <div className="p-4 sm:p-6">
+                      <div> {/* Top part of left column */} 
+                        <h3 className="text-xl sm:text-2xl font-bold text-white mb-1">{project.title}</h3>
+                        <p className="text-custom-orange text-xs sm:text-sm mb-3 sm:mb-4">{project.subtitle}</p>
                         
-                        <div>
-                          <h4 className="text-custom-orange font-semibold mb-1">My Role</h4>
-                          <p className="text-gray-300">{project.role}</p>
-                        </div>
-                        
-                        <div>
-                          <h4 className="text-custom-orange font-semibold mb-1">Tech Stack</h4>
-                          <div className="flex flex-wrap gap-1 sm:gap-2">
-                            {project.technologies.map((tech) => (
-                              <span
-                                key={tech}
-                                className="px-2 py-1 bg-custom-orange/10 text-custom-orange rounded-full text-xs flex items-center gap-1"
-                              >
-                                <i className={techIcons[tech] || "ri-code-line"}></i>
-                                {tech}
-                              </span>
-                            ))}
+                        <div className="space-y-3 sm:space-y-4 text-xs sm:text-sm mb-4">
+                          <div>
+                            <h4 className="text-custom-orange font-semibold mb-1">Goal</h4>
+                            <p className="text-gray-300">{project.goal}</p>
                           </div>
-                        </div>
-                        
-                        <div>
-                          <h4 className="text-custom-orange font-semibold mb-1">Outcome</h4>
-                          <p className="text-gray-300">{project.outcome}</p>
+                          
+                          <div>
+                            <h4 className="text-custom-orange font-semibold mb-1">My Role</h4>
+                            <p className="text-gray-300">{project.role}</p>
+                          </div>
+                          
+                          <div>
+                            <h4 className="text-custom-orange font-semibold mb-1">Tech Stack</h4>
+                            <div className="flex flex-wrap gap-1 sm:gap-2">
+                              {project.technologies.map((tech) => (
+                                <span
+                                  key={tech}
+                                  className="px-2 py-1 bg-custom-orange/10 text-custom-orange rounded-full text-xs flex items-center gap-1"
+                                >
+                                  <i className={techIcons[tech] || "ri-code-line"}></i>
+                                  {tech}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
 
-                    <div className="flex gap-2 sm:gap-3 justify-center">
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-3 sm:px-4 bg-custom-orange text-custom-dark py-1 rounded-lg text-center border border-custom-orange hover:bg-custom-dark hover:text-white transition-all duration-300 text-xs flex items-center gap-1 sm:gap-2"
-                      >
-                        <i className="ri-github-fill"></i>
-                        View Code
-                      </a>
-                      <a
-                        href={project.liveSite}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-3 sm:px-4 bg-custom-dark text-custom-gray py-1 rounded-lg text-center border border-custom-orange hover:bg-custom-orange hover:text-custom-dark transition-all duration-300 text-xs flex items-center gap-1 sm:gap-2"
-                      >
-                        <i className="ri-external-link-line"></i>
-                        Live Demo
-                      </a>
-                    </div>
-                  </div>
+                    {/* Image/Video, Outcome & Buttons Container (Right Column) */}
+                    <div className="p-4 sm:p-6 flex flex-col justify-between">
+                      <div> {/* Top part of right column (Image & Outcome) */} 
+                        {/* Image/Video Container */}
+                        <div className="relative h-[200px] w-full rounded-lg overflow-hidden group mb-4 sm:mb-6">
+                          {project.type === 'video' ? (
+                            <video
+                              ref={videoRef}
+                              className="w-full h-full object-cover rounded-lg"
+                              muted
+                              loop
+                              playsInline
+                              preload="auto"
+                              onMouseEnter={() => handleVideoHover(true)}
+                              onMouseLeave={() => handleVideoHover(false)}
+                            >
+                              <source src={project.video} type="video/mp4" />
+                            </video>
+                          ) : (
+                            <>
+                              <Image
+                                src={project.images![0]}
+                                alt={project.title}
+                                fill
+                                className="object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
+                                priority={index === 0}
+                              />
+                              {/* Hover Overlay for Images */} 
+                              {project.liveSite && (
+                                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                  <a
+                                    href={project.liveSite}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={(e) => e.stopPropagation()} // Prevent slide change or modal open
+                                    className="p-3 bg-custom-orange rounded-full text-white transform scale-90 group-hover:scale-100 transition-all duration-300 hover:bg-custom-orange/80"
+                                    aria-label="View Live Demo"
+                                  >
+                                    <i className="ri-external-link-line text-2xl"></i>
+                                  </a>
+                                </div>
+                              )}
+                            </>
+                          )}
+                        </div>
+                        
+                        {/* Outcome Section */}
+                        <div className="text-xs sm:text-sm">
+                          <h4 className="text-custom-orange font-semibold mb-1">Outcome</h4>
+                          <p className="text-gray-300">{project.outcome}</p>
+                        </div>
+                      </div>
 
-                  {/* Image/Video Container */}
-                  <div className="relative h-[180px] sm:h-[200px] w-full overflow-hidden">
-                    {project.type === 'video' ? (
-                      <video
-                        ref={videoRef}
-                        className="w-full h-full object-cover"
-                        muted
-                        loop
-                        playsInline
-                        preload="auto"
-                        onMouseEnter={() => handleVideoHover(true)}
-                        onMouseLeave={() => handleVideoHover(false)}
-                      >
-                        <source src={project.video} type="video/mp4" />
-                      </video>
-                    ) : (
-                      <Image
-                        src={project.images![0]}
-                        alt={project.title}
-                        fill
-                        className="object-cover"
-                        priority={index === 0}
-                      />
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                      <div> {/* Bottom part of right column (Buttons) */} 
+                        <div className="flex gap-2 sm:gap-3 justify-start ">
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-3 sm:px-4 bg-custom-orange text-custom-dark py-1 rounded-lg text-center border border-custom-orange hover:bg-custom-dark hover:text-white transition-all duration-300 text-xs flex items-center gap-1 sm:gap-2"
+                          >
+                            <i className="ri-github-fill"></i>
+                            View Code
+                          </a>
+                          {project.liveSite && (
+                            <a
+                              href={project.liveSite}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="px-3 sm:px-4 bg-custom-dark text-custom-gray py-1 rounded-lg text-center border border-custom-orange hover:bg-custom-orange hover:text-custom-dark transition-all duration-300 text-xs flex items-center gap-1 sm:gap-2"
+                            >
+                              <i className="ri-external-link-line"></i>
+                              Live Demo
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </motion.div>
               </SwiperSlide>
             ))}
           </Swiper>
+          <div className="swiper-pagination mt-8"></div>
         </div>
       </div>
+
+      {/* Modal */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={closeModal}
+            className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+          >
+            <motion.div
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.9 }}
+              className="relative max-w-7xl w-full max-h-[90vh] rounded-lg overflow-hidden"
+            >
+              <Image
+                src={selectedImage}
+                alt="Project Preview"
+                fill
+                className="object-contain"
+                quality={100}
+              />
+              <button
+                onClick={closeModal}
+                className="absolute top-4 right-4 text-white bg-custom-orange rounded-full p-2 hover:bg-custom-orange/80 transition-colors duration-300"
+              >
+                <i className="ri-close-line text-xl"></i>
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
