@@ -41,7 +41,7 @@ const About = () => {
           >
             <div className="prose prose-invert">
               <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
-                Hi, I'm Jedidah Onotu, a passionate Front-End Developer and Software Engineer with a focus on building clean, responsive, and user-focused web applications.
+                Hi, I&apos;m Jedidah Onotu, a passionate Front-End Developer and Software Engineer with a focus on building clean, responsive, and user-focused web applications.
               </p>
               
               <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
@@ -49,11 +49,11 @@ const About = () => {
               </p>
 
               <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
-                I'm currently interning at PHIS3, where I work on real-world health tech solutions, and I'm also actively building projects like a clothing e-commerce platform and a mental health app. I enjoy solving problems, learning new tools, and delivering experiences that make users feel at home.
+                I&apos;m currently interning at PHIS3, where I work on real-world health tech solutions, and I&apos;m also actively building projects like a clothing e-commerce platform and a mental health app. I enjoy solving problems, learning new tools, and delivering experiences that make users feel at home.
               </p>
 
               <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
-                When I'm not coding, I'm creating short stories for social media or designing content for my editing page.
+                When I&apos;m not coding, I&apos;m creating short stories for social media or designing content for my editing page.
               </p>
             </div>
           </motion.div>

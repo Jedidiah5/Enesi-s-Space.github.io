@@ -17,7 +17,7 @@ const Hero = () => {
             transition={{ duration: 0.8 }}
             className="mb-6"
           >
-            <h1 className="text-3xl sm:text-4xl pt-10 font-bold text-custom-orange mb-3">Hi, I'm <span className="text-white">Jedidiah Onotu</span></h1>
+            <h1 className="text-3xl sm:text-4xl pt-10 font-bold text-custom-orange mb-3">Hi, I&apos;m <span className="text-white">Jedidiah Onotu</span></h1>
             <h1 className="text-3xl sm:text-4xl font-bold text-white mb-6">
               I transform Ideas Into <span className="text-custom-orange">Digital Excellence</span>
             </h1>
@@ -36,7 +36,7 @@ const Hero = () => {
               href="#contact"
               className="bg-custom-orange text-white px-8 py-3 rounded-full font-medium hover:bg-custom-orange/90 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-custom-orange/20"
             >
-              Let's Work Together
+              Let&apos;s Work Together
             </Link>
             <a
               href="https://drive.google.com/file/d/1TlcWpRXrPgu-XX9ZM4Tvsi_AQ29427_Y/view?usp=drive_link"
