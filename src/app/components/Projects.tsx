@@ -1,76 +1,83 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
-import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
+import { EffectCoverflow, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
-import 'swiper/css/navigation';
 
 interface Project {
   title: string;
-  description: string;
+  subtitle: string;
+  goal: string;
+  role: string;
   technologies: string[];
-  github: string;
-  liveSite: string;
+  outcome: string;
   type: 'image' | 'video';
   images?: string[];
   video?: string;
+  github: string;
+  liveSite: string;
 }
 
-// Example projects data - you can replace this with your actual projects
 const projects: Project[] = [
+  // {
+  //   title: "MindEase",
+  //   subtitle: "Mental Health Platform",
+  //   goal: "Help users manage their mental health with daily check-ins and mood tracking.",
+  //   role: "Designed and developed the front-end using React, integrated mood tracker UI.",
+  //   technologies: ["React", "TailwindCSS", "Firebase", "Framer Motion"],
+  //   outcome: "Improved UX with smooth animations and a calming UI.",
+  //   images: ["/images/clotify1.png"],
+  //   github: "https://github.com/Jedidiah5/mindease",
+  //   liveSite: "https://mindease.vercel.app",
+  //   type: "image"
+  // },
   {
     title: "Clotify",
-    description: "A modern e-commerce platform for clothing with a sleek user interface, shopping cart functionality, and product filtering.",
-    images: ["/images/clotify1.png", "/images/clotify2.png", "/images/clotify3.png"],
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "React"],
+    subtitle: "Clothing E-commerce Site",
+    goal: "Create a stylish online shop with cart, checkout, and admin dashboard.",
+    role: "Built complete frontend, handled cart logic, and made the site fully responsive.",
+    technologies: ["Next.js", "Redux", "TailwindCSS", "TypeScript"],
+    outcome: "Ready-to-launch shopping site for small businesses.",
+    images: ["/images/clotify2.png"],
     github: "https://github.com/Jedidiah5/Clotify",
-    liveSite: "https://clotify.vercel.app",
+    liveSite: "https://clotify.vercel.app/",
     type: "image"
   },
   {
-    title: "3D-Page",
-    description: "Using Three.js, i created a 3D page that allows users to interact with the page in a 3D enviroment.",
+    title: "3D page",
+    subtitle: "Interactive 3D page",
+    goal: "Create an immersive 3D page showcasing 3D models",
+    role: "Developed the entire application using Three.js and React Three Fiber.",
+    technologies: ["Three.js", "React Three Fiber", "React", "TailwindCSS"],
+    outcome: "Unique and engaging portfolio that stands out from traditional websites.",
     video: "/3dPage.mov",
-    technologies: ["Three.js", "CSS"],
     github: "https://github.com/Jedidiah5/3D-Page",
     liveSite: "https://3-d-page-three.vercel.app/",
     type: "video"
-  },
-  {
-    title: "Bidspirit-Auction",
-    description: "Using basic html, css and javascript, i created an auction platform that allows users to bid on items and also buy items.",
-    images: ["/images/bidspirit-auction.jpg", "/images/Bidspirit2.png", "/images/Bidspirit3.png", "/images/Bidspirit4.jpg", "/images/Bidspirit5.jpg"],
-    technologies: ["CSS", "Html", "Javascript"],
-    github: "https://github.com/Jedidiah5/Bidspirit-Auction",
-    liveSite: "https://bidspirit-auction.vercel.app/",
-    type: "image"
-  },
-  {
-    title: "ElevateBiz",
-    description: "A premium web template designed to help business create strong online presence effortlessly",
-    images: ["/images/image.png"],
-    technologies: ["React", "Next.js", "Tailwind CSS", "TypeScript"],
-    github: "https://github.com/Jedidiah5/ElevateBiz",
-    liveSite: "https://elevate-biz-omega.vercel.app/",
-    type: "image"
   }
-  // {
-  //   title: "AI Chat Assistant",
-  //   description: "A real-time chat application powered by AI that provides intelligent responses and code suggestions for developers.",
-  //   images: ["/images/clotify1.png"],
-  //   technologies: ["OpenAI API", "Next.js", "TypeScript", "WebSocket"],
-  //   github: "https://github.com/Jedidiah5/ai-chat",
-  //   liveSite: "https://ai-chat-assistant.vercel.app",
-  //   type: "image"
-  // }
-
 ];
+
+const techIcons: { [key: string]: string } = {
+  "React": "ri-reactjs-line",
+  "Next.js": "ri-nextjs-line",
+  "TailwindCSS": "ri-tailwind-css-fill",
+  "TypeScript": "ri-javascript-fill",
+  "JavaScript": "ri-javascript-fill",
+  "HTML": "ri-html5-line",
+  "CSS": "ri-css3-line",
+  "Firebase": "ri-firebase-line",
+  "Redux": "ri-redux-line",
+  "Three.js": "ri-3d-line",
+  "Framer Motion": "ri-motion-line",
+  "Git": "ri-github-fill",
+  "Figma": "ri-figma-fill"
+};
 
 const Projects = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -79,7 +86,7 @@ const Projects = () => {
 
   const handleVideoHover = (isHovering: boolean) => {
     if (!videoRef.current) return;
-
+    
     if (isHovering) {
       videoRef.current.play().catch(() => {});
     } else {
@@ -89,39 +96,26 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="py-20 bg-black overflow-hidden">
+    <section id="projects" className="py-12 sm:py-20 bg-black overflow-hidden">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-8 sm:mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-custom-gray mb-4">
-            My <span className="text-custom-orange">Projects</span>
+          <h2 className="text-2xl sm:text-4xl font-bold text-white mb-4 flex items-center justify-center gap-2">
+            <i className="ri-puzzle-line text-xl sm:text-2xl"></i>
+            Featured <span className="text-custom-orange">Projects</span>
           </h2>
-          <p className="text-custom-gray-light/80 max-w-2xl mx-auto">
-            Here are some of my recent projects. Each one represents a unique challenge and solution.
+          <p className="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base">
+            Deep dive into some of my recent projects and their impact
           </p>
         </motion.div>
 
         <div className="relative w-full max-w-[1800px] mx-auto">
           <style jsx global>{`
-            .swiper-container {
-              overflow: visible !important;
-              padding: 0 10px;
-              @media (min-width: 768px) {
-                padding: 0 100px;
-              }
-            }
-            .swiper-wrapper {
-              align-items: center;
-              padding: 10px 0;
-              @media (min-width: 768px) {
-                padding: 20px 0;
-              }
-            }
             .swiper-slide {
               transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
               transform: scale(0.75) translateY(50px);
@@ -134,10 +128,6 @@ const Projects = () => {
               max-width: 660px;
               position: relative;
               z-index: 1;
-              @media (max-width: 768px) {
-                max-width: 100%;
-                transform: scale(0.9) translateY(30px);
-              }
             }
             .swiper-slide-active {
               transform: scale(1) translateY(0);
@@ -153,10 +143,6 @@ const Projects = () => {
               transform: scale(0.75) translateY(50px) translateX(-50%);
               z-index: 2;
             }
-            .swiper-pagination {
-              position: relative;
-              bottom: -20px !important;
-            }
             .swiper-pagination-bullet {
               background: var(--custom-orange);
               opacity: 0.5;
@@ -165,9 +151,17 @@ const Projects = () => {
               background: var(--custom-orange);
               opacity: 1;
             }
-            .swiper-button-prev,
-            .swiper-button-next {
-              display: none !important;
+            @media (max-width: 640px) {
+              .swiper-slide {
+                transform: scale(0.9) translateY(30px);
+              }
+              .swiper-slide-active {
+                transform: scale(1) translateY(0);
+              }
+              .swiper-slide-prev,
+              .swiper-slide-next {
+                transform: scale(0.9) translateY(30px);
+              }
             }
           `}</style>
 
@@ -183,26 +177,12 @@ const Projects = () => {
               rotate: 0,
               stretch: 0,
               depth: 100,
-              modifier: 2,
+              modifier: 1,
               slideShadows: false
             }}
             pagination={{
               clickable: true,
               dynamicBullets: true
-            }}
-            breakpoints={{
-              320: {
-                slidesPerView: 1,
-                spaceBetween: 20
-              },
-              640: {
-                slidesPerView: "auto",
-                spaceBetween: -50
-              },
-              768: {
-                slidesPerView: "auto",
-                spaceBetween: -100
-              }
             }}
             modules={[EffectCoverflow, Pagination]}
             onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
@@ -222,7 +202,7 @@ const Projects = () => {
                 }}
               >
                 <motion.div
-                  className="relative bg-custom-blue/10 rounded-[11.7px] overflow-hidden w-full border-2 border-custom-orange shadow-lg"
+                  className="relative bg-custom-blue/10 rounded-lg overflow-hidden w-full border border-custom-orange/20 shadow-lg"
                   animate={{ 
                     scale: index === activeIndex ? 1 : 0.75,
                     opacity: index === activeIndex ? 1 : 0.65,
@@ -236,50 +216,68 @@ const Projects = () => {
                   transition={{ duration: 0.6 }}
                 >
                   {/* Content Container */}
-                  <div className="p-4 md:p-6">
-                    <motion.div 
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.2 }}
-                      className="mb-4 text-center"
-                    >
-                      <h3 className="text-xl font-bold text-custom-gray mb-3">{project.title}</h3>
-                      <p className="text-custom-gray-light/80 text-sm">{project.description}</p>
-                    </motion.div>
+                  <div className="p-4 sm:p-6">
+                    <div className="mb-4 sm:mb-6">
+                      <h3 className="text-xl sm:text-2xl font-bold text-white mb-1">{project.title}</h3>
+                      <p className="text-custom-orange text-xs sm:text-sm mb-3 sm:mb-4">{project.subtitle}</p>
+                      
+                      <div className="space-y-3 sm:space-y-4 text-xs sm:text-sm">
+                        <div>
+                          <h4 className="text-custom-orange font-semibold mb-1">Goal</h4>
+                          <p className="text-gray-300">{project.goal}</p>
+                        </div>
+                        
+                        <div>
+                          <h4 className="text-custom-orange font-semibold mb-1">My Role</h4>
+                          <p className="text-gray-300">{project.role}</p>
+                        </div>
+                        
+                        <div>
+                          <h4 className="text-custom-orange font-semibold mb-1">Tech Stack</h4>
+                          <div className="flex flex-wrap gap-1 sm:gap-2">
+                            {project.technologies.map((tech) => (
+                              <span
+                                key={tech}
+                                className="px-2 py-1 bg-custom-orange/10 text-custom-orange rounded-full text-xs flex items-center gap-1"
+                              >
+                                <i className={techIcons[tech] || "ri-code-line"}></i>
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <h4 className="text-custom-orange font-semibold mb-1">Outcome</h4>
+                          <p className="text-gray-300">{project.outcome}</p>
+                        </div>
+                      </div>
+                    </div>
 
-                    <div className="flex flex-wrap gap-2 mb-4 justify-center">
-                  {project.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                          className="px-2 py-1 bg-custom-purple/10 text-custom-orange rounded-full text-xs"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                
-                    <div className="flex gap-3 justify-center">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                        className="px-4 bg-custom-orange text-custom-dark py-1 rounded-lg text-center border border-custom-orange hover:bg-custom-dark hover:text-white transition-all duration-300 text-xs"
-                  >
-                    GitHub
-                  </a>
-                  <a
-                    href={project.liveSite}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                        className="px-4 bg-custom-dark text-custom-gray py-1 rounded-lg text-center border border-custom-orange hover:bg-custom-orange hover:text-custom-dark transition-all duration-300 text-xs"
-                  >
-                    Live Site
-                  </a>
-                </div>
-              </div>
+                    <div className="flex gap-2 sm:gap-3 justify-center">
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-3 sm:px-4 bg-custom-orange text-custom-dark py-1 rounded-lg text-center border border-custom-orange hover:bg-custom-dark hover:text-white transition-all duration-300 text-xs flex items-center gap-1 sm:gap-2"
+                      >
+                        <i className="ri-github-fill"></i>
+                        View Code
+                      </a>
+                      <a
+                        href={project.liveSite}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-3 sm:px-4 bg-custom-dark text-custom-gray py-1 rounded-lg text-center border border-custom-orange hover:bg-custom-orange hover:text-custom-dark transition-all duration-300 text-xs flex items-center gap-1 sm:gap-2"
+                      >
+                        <i className="ri-external-link-line"></i>
+                        Live Demo
+                      </a>
+                    </div>
+                  </div>
 
                   {/* Image/Video Container */}
-                  <div className="relative h-[200px] md:h-[300px] w-full overflow-hidden">
+                  <div className="relative h-[180px] sm:h-[200px] w-full overflow-hidden">
                     {project.type === 'video' ? (
                       <video
                         ref={videoRef}
@@ -303,10 +301,10 @@ const Projects = () => {
                       />
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-              </div>
-            </motion.div>
+                  </div>
+                </motion.div>
               </SwiperSlide>
-          ))}
+            ))}
           </Swiper>
         </div>
       </div>

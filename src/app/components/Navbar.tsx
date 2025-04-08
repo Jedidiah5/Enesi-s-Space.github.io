@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
-const navItems = ['Home', 'About', 'Projects', 'Contact'];
+const navItems = ['Home', 'About', 'Services', 'Projects', 'Contact'];
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -125,6 +125,19 @@ const Navbar = () => {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 About
+              </motion.a>
+
+              <motion.a
+                href="#services"
+                whileHover={{ scale: 1.05 }}
+                className={`block px-3 py-2 text-center font-medium transition-all duration-300 ${
+                  activeSection === 'Services' 
+                    ? 'text-custom-orange' 
+                    : 'text-white hover:text-custom-orange'
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Services
               </motion.a>
 
               <motion.a
