@@ -79,10 +79,10 @@ const projects: Project[] = [
     role: "Developed the entire application using Three.js and React Three Fiber.",
     technologies: ["Three.js", "React Three Fiber", "React", "TailwindCSS"],
     outcome: "Unique and engaging portfolio that stands out from traditional websites.",
-    video: "/3dPage.mov",
+    images: ["/images/3Dpage.png"],
     github: "https://github.com/Jedidiah5/3D-Page",
     liveSite: "https://3-d-page-three.vercel.app/",
-    type: "video"
+    type: "image"
   }
 ];
 
