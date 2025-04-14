@@ -26,8 +26,8 @@ export default function Contact() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl font-bold mb-4 text-white">Let's Build Something Great Together</h1>
-          <p className="text-xl text-gray-400">Got a project in mind? Reach out—I'd love to hear from you.</p>
+          <h1 className="text-4xl font-bold mb-4 text-white">Let&apos;s Build Something Great Together</h1>
+          <p className="text-xl text-gray-400">Got a project in mind? Reach out—I&apos;d love to hear from you.</p>
         </motion.div>
 
         {/* Contact Form */}
@@ -96,7 +96,7 @@ export default function Contact() {
                        active:scale-[0.98]
                        transition-all duration-200 font-semibold"
             >
-              Let's Talk
+              Let&apos;s Talk
             </button>
           </motion.form>
         ) : (
@@ -106,7 +106,7 @@ export default function Contact() {
             className="text-center p-8 bg-custom-blue/10 rounded-lg border border-custom-orange/20"
           >
             <h3 className="text-2xl font-semibold text-custom-orange mb-2">Thanks for reaching out!</h3>
-            <p className="text-gray-300">I'll get back to you within 24–48 hours.</p>
+            <p className="text-gray-300">I&apos;ll get back to you within 24–48 hours.</p>
           </motion.div>
         )}
 

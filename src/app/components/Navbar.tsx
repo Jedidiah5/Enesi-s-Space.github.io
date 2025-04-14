@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 const navItems = ['Home', 'About', 'Services', 'Projects', 'Contact'];
 
@@ -72,9 +73,11 @@ const Navbar = () => {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link href="/" className="text-custom-orange font-bold text-xl">
-              <img 
-                src="favicon.ico" 
+              <Image 
+                src="/favicon.ico" 
                 alt="Logo" 
+                width={32}
+                height={32}
                 className="h-8 w-auto"
               />
             </Link>
