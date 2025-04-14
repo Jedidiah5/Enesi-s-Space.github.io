@@ -1,175 +1,167 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
 const navItems = ['Home', 'About', 'Services', 'Projects', 'Contact'];
 
 const Navbar = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('Home');
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
+    
     const handleScroll = () => {
-      const sections = navItems.map(item => document.getElementById(item.toLowerCase()));
+      if (!isMounted) return;
+
       const scrollPosition = window.scrollY + 100;
+      const sections = navItems.map(item => document.getElementById(item.toLowerCase()));
+      
+      if (sections.some(section => !section)) return;
 
       for (let i = sections.length - 1; i >= 0; i--) {
-        if ((sections[i] as HTMLElement).offsetTop <= scrollPosition) {
+        const section = sections[i];
+        if (section && section.offsetTop <= scrollPosition) {
           setActiveSection(navItems[i]);
           break;
         }
       }
     };
 
-    const handleResize = () => {
-      setIsSmallScreen(window.innerWidth <= 768); // Adjust for smaller screens
-    };
-
     window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', handleResize);
+    handleScroll();
 
-    handleResize(); // Check size on load
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isMounted]);
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isOpen]);
+
+  const menuVariants = {
+    closed: {
+      opacity: 0,
+      x: "100%",
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut"
+      }
+    },
+    open: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut"
+      }
+    }
+  };
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="fixed w-full top-0 z-50 shadow-lg font-poppins"
-      style={{ backgroundColor: 'transparent', backdropFilter: 'blur(10px)' }}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link href="/" className="text-2xl font-bold text-custom-orange hover:text-white/90 transition-all duration-300 hover:scale-105">
-              ENESI
+    <nav className="fixed top-0 w-full z-50">
+      <div className="w-full bg-transparent backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <Link href="/" className="text-custom-orange font-bold text-xl">
+              <img 
+                src="favicon.ico" 
+                alt="Logo" 
+                className="h-8 w-auto"
+              />
             </Link>
-          </div>
 
-          {/* Desktop Navigation */}
-          <div className={`flex-1 ${isSmallScreen ? 'hidden' : 'flex'} justify-center`}>
-            <div className="flex space-x-8">
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex space-x-8">
               {navItems.map((item) => (
-                <motion.a
+                <Link
                   key={item}
                   href={`#${item.toLowerCase()}`}
-                  whileHover={{ scale: 1.1 }}
-                  className={`transition-all duration-300 relative group ${
+                  className={`text-sm font-medium transition-colors duration-300 ${
                     activeSection === item 
                       ? 'text-custom-orange' 
-                      : 'text-white hover:text-custom-orange'
+                    : 'text-gray-300 hover:text-custom-orange/80'
                   }`}
                 >
                   {item}
-                  <span className={`absolute bottom-0 left-0 h-0.5 transition-all duration-300 ${
-                    activeSection === item 
-                      ? 'w-full bg-custom-orange' 
-                      : 'w-0 bg-custom-orange group-hover:w-full'
-                  }`}></span>
-                </motion.a>
+                </Link>
               ))}
             </div>
+
+            {/* Mobile Menu Button */}
+            <button 
+              onClick={() => setIsOpen(!isOpen)}
+              className="md:hidden w-10 h-10 flex items-center justify-center focus:outline-none"
+              aria-label="Toggle menu"
+            >
+              <div className="relative w-6 h-5">
+                <span
+                  className={`absolute w-6 h-0.5 bg-custom-orange transform transition-all duration-300 ease-in-out ${
+                    isOpen ? 'rotate-45 translate-y-2' : '-translate-y-2'
+                  }`}
+                />
+                <span
+                  className={`absolute w-6 h-0.5 bg-custom-orange transform transition-all duration-300 ease-in-out ${
+                    isOpen ? 'opacity-0' : 'opacity-100'
+                  }`}
+                />
+                <span
+                  className={`absolute w-6 h-0.5 bg-custom-orange transform transition-all duration-300 ease-in-out ${
+                    isOpen ? '-rotate-45 translate-y-2' : 'translate-y-2'
+                  }`}
+                />
+              </div>
+            </button>
           </div>
-
-          {/* Mobile Menu Button */}
-          {isSmallScreen && (
-            <div className="sm:hidden">
-              <button 
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="text-white hover:text-custom-orange p-2 transition-all duration-300 hover:scale-110"
-              >
-                <svg
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-              </button>
-            </div>
-          )}
         </div>
+      </div>
 
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && isSmallScreen && (
-          <motion.div 
+      {/* Updated Mobile Menu - Vertical List */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="sm:hidden"
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="fixed top-16 left-0 right-0 bg-black/20 backdrop-blur-md md:hidden border-b border-custom-orange/10"
           >
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              <motion.a
-                href="#about"
-                whileHover={{ scale: 1.05 }}
-                className={`block px-3 py-2 text-center font-medium transition-all duration-300 ${
-                  activeSection === 'About' 
-                    ? 'text-custom-orange' 
-                    : 'text-white hover:text-custom-orange'
-                }`}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                About
-              </motion.a>
-
-              <motion.a
-                href="#services"
-                whileHover={{ scale: 1.05 }}
-                className={`block px-3 py-2 text-center font-medium transition-all duration-300 ${
-                  activeSection === 'Services' 
-                    ? 'text-custom-orange' 
-                    : 'text-white hover:text-custom-orange'
-                }`}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Services
-              </motion.a>
-
-              <motion.a
-                href="#projects"
-                whileHover={{ scale: 1.05 }}
-                className={`block px-3 py-2 text-center font-medium transition-all duration-300 ${
-                  activeSection === 'Projects' 
-                    ? 'text-custom-orange' 
-                    : 'text-white hover:text-custom-orange'
-                }`}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Projects
-              </motion.a>
-
-              <motion.a
-                href="#contact"
-                whileHover={{ scale: 1.05 }}
-                className={`block px-3 py-2 text-center font-medium transition-all duration-300 ${
-                  activeSection === 'Contact' 
-                    ? 'text-custom-orange' 
-                    : 'text-white hover:text-custom-orange'
-                }`}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Contact
-              </motion.a>
+            <div className="flex flex-col items-center py-4">
+              {navItems.map((item) => (
+                <motion.div
+                  key={item}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3, delay: navItems.indexOf(item) * 0.1 }}
+                  className="w-full"
+                >
+                  <Link
+                    href={`#${item.toLowerCase()}`}
+                    onClick={() => setIsOpen(false)}
+                    className={`block py-3 text-center text-base font-medium transition-colors duration-300 ${
+                      activeSection === item
+                        ? 'text-custom-orange' 
+                        : 'text-gray-300 hover:text-custom-orange/80'
+                    }`}
+                  >
+                    {item}
+                  </Link>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         )}
-      </div>
-    </motion.nav>
+      </AnimatePresence>
+    </nav>
   );
 };
 
