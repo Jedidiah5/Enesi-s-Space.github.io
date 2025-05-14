@@ -41,7 +41,7 @@ const About = () => {
           >
             <div className="prose prose-invert">
               <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
-                Hi, I&apos;m Jedidah Onotu, a passionate Front-End Developer and Software Engineer with a focus on building clean, responsive, and user-focused web applications.
+                Hi, I&apos;m  a passionate Front-End Developer and Software Engineer with a focus on building clean, responsive, and user-focused web applications.
               </p>
               
               <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
@@ -49,7 +49,7 @@ const About = () => {
               </p>
 
               <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
-                I&apos;m currently interning at PHIS3, where I work on real-world health tech solutions, and I&apos;m also actively building projects like a clothing e-commerce platform and a mental health app. I enjoy solving problems, learning new tools, and delivering experiences that make users feel at home.
+                I&apos;m currently interning at Wish to Wear, and I&apos;m also actively building projects like an application to help creators post on different platforms at the same time and a mental health app. I enjoy solving problems, learning new tools, and delivering experiences that make users feel at home.
               </p>
 
               <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
@@ -88,12 +88,12 @@ const About = () => {
               </h3>
               <div className="space-y-3 sm:space-y-4">
                 <div className="bg-custom-blue/10 rounded-lg p-3 sm:p-4 border border-custom-orange/20">
-                  <h4 className="text-custom-orange font-semibold mb-2 text-sm sm:text-base">PHIS3 Internship</h4>
-                  <p className="text-gray-400 text-sm sm:text-base">Working on healthcare technology solutions and gaining real-world experience.</p>
+                  <h4 className="text-custom-orange font-semibold mb-2 text-sm sm:text-base">Wish to Wear</h4>
+                  <p className="text-gray-400 text-sm sm:text-base">Working on a startup for clothing brands to sell their products.</p>
                 </div>
                 <div className="bg-custom-blue/10 rounded-lg p-3 sm:p-4 border border-custom-orange/20">
                   <h4 className="text-custom-orange font-semibold mb-2 text-sm sm:text-base">Personal Projects</h4>
-                  <p className="text-gray-400 text-sm sm:text-base">Developing e-commerce platforms and mental health applications.</p>
+                  <p className="text-gray-400 text-sm sm:text-base">Developing applications to help creators post on different platforms at the same time and a mental health app.</p>
                 </div>
               </div>
             </div>

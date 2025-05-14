@@ -69,9 +69,9 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 w-full z-50">
       <div className="w-full bg-transparent backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
             <Link href="/" className="text-custom-orange font-bold text-xl">
               <Image 
                 src="/favicon.ico" 
@@ -82,7 +82,7 @@ const Navbar = () => {
               />
             </Link>
 
-            {/* Desktop Navigation */}
+          {/* Desktop Navigation */}
             <div className="hidden md:flex space-x-8">
               {navItems.map((item) => (
                 <Link
@@ -97,10 +97,10 @@ const Navbar = () => {
                   {item}
                 </Link>
               ))}
-            </div>
+          </div>
 
-            {/* Mobile Menu Button */}
-            <button 
+          {/* Mobile Menu Button */}
+              <button 
               onClick={() => setIsOpen(!isOpen)}
               className="md:hidden w-10 h-10 flex items-center justify-center focus:outline-none"
               aria-label="Toggle menu"
@@ -122,15 +122,15 @@ const Navbar = () => {
                   }`}
                 />
               </div>
-            </button>
-          </div>
+              </button>
+            </div>
         </div>
-      </div>
+        </div>
 
       {/* Updated Mobile Menu - Vertical List */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
+          <motion.div 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -152,7 +152,7 @@ const Navbar = () => {
                     onClick={() => setIsOpen(false)}
                     className={`block py-3 text-center text-base font-medium transition-colors duration-300 ${
                       activeSection === item
-                        ? 'text-custom-orange' 
+                    ? 'text-custom-orange' 
                         : 'text-gray-300 hover:text-custom-orange/80'
                     }`}
                   >

@@ -25,18 +25,18 @@ interface Project {
 }
 
 const projects: Project[] = [
-  // {
-  //   title: "MindEase",
-  //   subtitle: "Mental Health Platform",
-  //   goal: "Help users manage their mental health with daily check-ins and mood tracking.",
-  //   role: "Designed and developed the front-end using React, integrated mood tracker UI.",
-  //   technologies: ["React", "TailwindCSS", "Firebase", "Framer Motion"],
-  //   outcome: "Improved UX with smooth animations and a calming UI.",
-  //   images: ["/images/clotify1.png"],
-  //   github: "https://github.com/Jedidiah5/mindease",
-  //   liveSite: "https://mindease.vercel.app",
-  //   type: "image"
-  // },
+  {
+    title: "Whispr",
+    subtitle: "Ai powered audio journal",
+    goal: "Used to keep detailed entries of your day",
+    role: "Designed and developed the full application",
+    technologies: ["React", "TailwindCSS", "Firebase", "Next.js", "OpenAI", "Vercel"],
+    outcome: "Succesull able to store users journal entries.",
+    images: ["/images/whispr.png"],
+    github: "https://github.com/Jedidiah5/Whispr",
+    liveSite: "https://whispr-jedidiah5s-projects.vercel.app/",
+    type: "image"
+  },
   {
     title: "Store Management System",
     subtitle: "Inventory & Sales Management Application",
@@ -67,7 +67,7 @@ const projects: Project[] = [
     role: "Built complete frontend.",
     technologies: ["Next.js", "Typescript", "TailwindCSS", "React"],
     outcome: "Already active on Vercel",
-    images: ["/images/image.png"],
+    images: ["/images/elevatebiz.png"],
     github: "https://github.com/Jedidiah5/ElevateBiz",
     liveSite: "https://elevate-biz-omega.vercel.app/",
     type: "image"
