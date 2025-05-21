@@ -26,18 +26,6 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: "Whispr",
-    subtitle: "Ai powered audio journal",
-    goal: "Used to keep detailed entries of your day",
-    role: "Designed and developed the full application",
-    technologies: ["React", "TailwindCSS", "Firebase", "Next.js", "OpenAI", "Vercel"],
-    outcome: "Succesull able to store users journal entries.",
-    images: ["/images/whispr.png"],
-    github: "https://github.com/Jedidiah5/Whispr",
-    liveSite: "https://whispr-jedidiah5s-projects.vercel.app/",
-    type: "image"
-  },
-  {
     title: "Store Management System",
     subtitle: "Inventory & Sales Management Application",
     goal: "Create a comprehensive system for managing store inventory, sales tracking, and employee management.",
@@ -58,6 +46,30 @@ const projects: Project[] = [
     images: ["/images/clotify2.png"],
     github: "https://github.com/Jedidiah5/Clotify",
     liveSite: "https://clotify.vercel.app/",
+    type: "image"
+  },
+  {
+    title: "Scriptify",
+    subtitle: "AI-Powered Short-Form Video Script Generator",
+    goal: "Helps generate video scripts for a given topic or niche",
+    role: "Designed and developed the full application",
+    technologies: ["TypeScript", "NextJS", "Tailwind CSS", "Genkit", "Gemini", "Vercel"],
+    outcome: "Succesull able to generate video scripts.",
+    images: ["/images/scriptify.png"],
+    github: "https://github.com/Jedidiah5/Scriptify",
+    liveSite: "https://scriptify-jedidiah5s-projects.vercel.app/",
+    type: "image"
+  },
+  {
+    title: "Whispr",
+    subtitle: "Ai powered audio journal",
+    goal: "Used to keep detailed entries of your day",
+    role: "Designed and developed the full application",
+    technologies: ["React", "TailwindCSS", "Firebase", "Next.js", "OpenAI", "Vercel"],
+    outcome: "Succesull able to store users journal entries.",
+    images: ["/images/whispr.png"],
+    github: "https://github.com/Jedidiah5/Whispr",
+    liveSite: "https://whispr-jedidiah5s-projects.vercel.app/",
     type: "image"
   },
   {
