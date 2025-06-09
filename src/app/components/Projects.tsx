@@ -73,18 +73,6 @@ const projects: Project[] = [
     type: "image"
   },
   {
-    title: "ElevateBiz",
-    subtitle: "A modern business site template to build an online presence with customizable features.",
-    goal: "Create a  modern template for businessesto build an online presence with customizable features.",
-    role: "Built complete frontend.",
-    technologies: ["Next.js", "Typescript", "TailwindCSS", "React"],
-    outcome: "Already active on Vercel",
-    images: ["/images/elevatebiz.png"],
-    github: "https://github.com/Jedidiah5/ElevateBiz",
-    liveSite: "https://elevate-biz-omega.vercel.app/",
-    type: "image"
-  },
-  {
     title: "3D page",
     subtitle: "Interactive 3D page",
     goal: "Create an immersive 3D page showcasing 3D models",
@@ -95,7 +83,20 @@ const projects: Project[] = [
     github: "https://github.com/Jedidiah5/3D-Page",
     liveSite: "https://3-d-page-three.vercel.app/",
     type: "image"
+  },
+  {
+    title: "ElevateBiz",
+    subtitle: "A modern business site template to build an online presence with customizable features.",
+    goal: "Create a  modern template for businessesto build an online presence with customizable features.",
+    role: "Built complete frontend.",
+    technologies: ["Next.js", "Typescript", "TailwindCSS", "React"],
+    outcome: "Already active on Vercel",
+    images: ["/images/elevatebiz.png"],
+    github: "https://github.com/Jedidiah5/ElevateBiz",
+    liveSite: "https://elevate-biz-omega.vercel.app/",
+    type: "image"
   }
+
 ];
 
 const techIcons: { [key: string]: string } = {
