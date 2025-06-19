@@ -88,12 +88,12 @@ const About = () => {
               </h3>
               <div className="space-y-3 sm:space-y-4">
                 <div className="bg-custom-blue/10 rounded-lg p-3 sm:p-4 border border-custom-orange/20">
-                  <h4 className="text-custom-orange font-semibold mb-2 text-sm sm:text-base">Wish to Wear</h4>
-                  <p className="text-gray-400 text-sm sm:text-base">Working on a startup for clothing brands to sell their products.</p>
+                  <h4 className="text-custom-orange font-semibold mb-2 text-sm sm:text-base">HLS</h4>
+                  <p className="text-gray-400 text-sm sm:text-base">Working on a startup with a team as the front-end developer</p>
                 </div>
                 <div className="bg-custom-blue/10 rounded-lg p-3 sm:p-4 border border-custom-orange/20">
                   <h4 className="text-custom-orange font-semibold mb-2 text-sm sm:text-base">Personal Projects</h4>
-                  <p className="text-gray-400 text-sm sm:text-base">Developing applications to help creators post on different platforms at the same time and a mental health app.</p>
+                  <p className="text-gray-400 text-sm sm:text-base">Working on a react native app to build my knowledge on react-native</p>
                 </div>
               </div>
             </div>
