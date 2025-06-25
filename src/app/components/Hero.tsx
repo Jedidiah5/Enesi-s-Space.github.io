@@ -39,7 +39,7 @@ const Hero = () => {
                 Let&apos;s Work Together
               </Link>
               <a
-                href="https://drive.google.com/file/d/1TlcWpRXrPgu-XX9ZM4Tvsi_AQ29427_Y/view?usp=sharing"
+                href="https://drive.google.com/file/d/1aKxw7D-XWAaSZ92LJu94CtVUutk3tmmH/view?usp=drive_link"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="border-2 border-custom-orange text-custom-orange px-8 py-3 rounded-full font-medium hover:bg-custom-orange/10 transition-all duration-300 transform hover:scale-105"

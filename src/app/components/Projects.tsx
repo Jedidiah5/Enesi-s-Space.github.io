@@ -26,6 +26,18 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: "Task Manager Web App",
+    subtitle: "Modern Task Tracking Platform",
+    goal: "Build a responsive task management tool that allows users to add, update, and track their tasks in real-time.",
+    role: "Designed and developed the front end using React and Next.js, integrated Firebase for real-time database updates and authentication.",
+    technologies: ["Next.js", "React", "JavaScript", "Tailwind CSS", "Firebase"],
+    outcome: "Successfully deployed MVP with real-time task updates, authentication, and responsive design. Currently refining features and UI.",
+    images: ["/images/Taskmaster.png"],
+    github: "https://github.com/Jedidiah5/TaskManagerApp",
+    liveSite: "https://task-manager-app-kappa-cyan.vercel.app/",
+    type: "image"
+  },
+  {
     title: "Store Management System",
     subtitle: "Inventory & Sales Management Application",
     goal: "Create a comprehensive system for managing store inventory, sales tracking, and employee management.",
@@ -34,6 +46,17 @@ const projects: Project[] = [
     outcome: "Still in development",
     images: ["/images/StoreSystem1.jpg"],
     github: "https://github.com/Jedidiah5/storeManagementSystem",
+    type: "image"
+  },
+  {
+    title: "Auralis — Document Summarizer & Audio Converter",
+    subtitle: "AI-powered PDF Summarization & Text-to-Speech Web App",
+    goal: "Create a web application that summarizes PDF documents and converts the summaries into downloadable audio files. The app also aims to support full document-to-audio conversion.",
+    role: "Designed and developed the front end using React and integrated AI-powered summarization and text-to-speech functionalities. ",
+    technologies: ["React", "JavaScript", "Tailwind CSS", "Firebase", "OpenAI API", "Text-to-Speech API"],
+    outcome: "Successfully built MVP with PDF upload, summary generation, and audio conversion. Full document-to-audio feature is in progress.",
+    images: ["/images/Auralis.png"], 
+    github: "https://github.com/Jedidiah5/Auralis",
     type: "image"
   },
   {
