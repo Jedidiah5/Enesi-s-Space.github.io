@@ -21,8 +21,12 @@ const Hero = () => {
               className="mb-6"
             >
               <h1 className="text-3xl sm:text-4xl pt-10 font-bold text-white mb-3">Hi, I&apos;m <span className="text-custom-orange">Jedidiah Onotu</span></h1>
+              <p className="text-lg sm:text-xl text-custom-orange/90 mb-2">Full-stack developer · London, UK</p>
+              <p className="text-base sm:text-lg text-gray-400 max-w-3xl mx-auto lg:mx-0 mb-2">
+                BSc Information Technology @ Middlesex University — graduating soon.
+              </p>
               <p className="text-xl sm:text-2xl text-gray-300 max-w-3xl mx-auto lg:mx-0 mb-8">
-                I transform ideas into digital excellence, I build responsive and user-friendly web applications that elevate your online presence. I specialize in modern web technologies and exceptional user experiences.
+                I design and build web applications end to end: APIs, databases, and interfaces that are fast, accessible, and maintainable.
               </p>
             </motion.div>
             
@@ -109,7 +113,7 @@ const Hero = () => {
               {[
                 { number: "2+", label: "Years Experience" },
                 { number: "15+", label: "Projects Completed" },
-                { number: "10+", label: "Happy Clients" },
+                { number: "UK", label: "Based in London" },
                 { number: "5+", label: "Technologies Mastered" }
               ].map((stat, index) => (
                 <div key={index} className="text-center lg:text-left">

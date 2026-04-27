@@ -4,29 +4,24 @@ import { motion } from 'framer-motion';
 
 const services = [
   {
-    title: "Front-End Web Development",
-    description: "Creating responsive and interactive websites using modern technologies and best practices.",
-    icon: "ri-global-line"
+    title: "Full-stack web applications",
+    description: "End-to-end builds: REST or serverless APIs, data persistence, auth, and polished front ends with React/Next.js.",
+    icon: "ri-stack-line"
   },
   {
-    title: "UI/UX Implementation",
-    description: "Translating designs into functional interfaces with a focus on user experience and accessibility.",
-    icon: "ri-palette-line"
+    title: "Front-end & UI",
+    description: "Responsive, accessible interfaces with strong UX, component-driven structure, and modern styling.",
+    icon: "ri-layout-4-line"
   },
   {
-    title: "Website Optimization",
-    description: "Improving performance, SEO, and user experience through code optimization and best practices.",
+    title: "Back-end & integrations",
+    description: "Server logic, third-party APIs, webhooks, and production-minded error handling and security.",
+    icon: "ri-server-line"
+  },
+  {
+    title: "Performance & quality",
+    description: "Faster pages, lean bundles, and maintainable code so features stay shippable as products grow.",
     icon: "ri-flashlight-line"
-  },
-  {
-    title: "E-commerce Websites",
-    description: "Building secure and scalable online stores with payment integration and inventory management.",
-    icon: "ri-shopping-cart-line"
-  },
-  {
-    title: "Maintenance & Updates",
-    description: "Regular updates, security patches, and feature additions to keep your website running smoothly.",
-    icon: "ri-refresh-fill"
   }
 ];
 
@@ -46,7 +41,7 @@ const Services = () => {
             My <span className="text-custom-orange">Services</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base">
-            Comprehensive web development services to bring your ideas to life
+            From database to deployment — I help turn ideas into reliable full-stack products
           </p>
         </motion.div>
 

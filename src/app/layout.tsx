@@ -12,8 +12,9 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: 'Enesi\'s Space',
-  description: 'Welcome to my portfolio website',
+  title: "Enesi's Space — Full-stack developer · London, UK",
+  description:
+    'BSc Information Technology (Middlesex University, London). Full-stack developer — APIs, data, and modern web UI.',
 };
 
 export default function RootLayout({

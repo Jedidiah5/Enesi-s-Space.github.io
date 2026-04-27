@@ -26,122 +26,73 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: "Task Manager Web App",
-    subtitle: "Modern Task Tracking Platform",
-    goal: "Build a responsive task management tool that allows users to add, update, and track their tasks in real-time.",
-    role: "Designed and developed the front end using React and Next.js, integrated Firebase for real-time database updates and authentication.",
-    technologies: ["Next.js", "React", "JavaScript", "Tailwind CSS", "Firebase"],
-    outcome: "Successfully deployed MVP with real-time task updates, authentication, and responsive design. Currently refining features and UI.",
-    images: ["/images/Taskmaster.png"],
-    github: "https://github.com/Jedidiah5/TaskManagerApp",
-    liveSite: "https://task-manager-app-kappa-cyan.vercel.app/",
+    title: "Enesi's Space (portfolio)",
+    subtitle: "Personal site — you’re on it",
+    goal: "Show experience, services, and projects in one fast, accessible site that deploys easily to GitHub Pages or similar.",
+    role: "Solo: Next.js App Router, styling, and content. Iterating the gallery and copy as I prepare to graduate.",
+    technologies: ["Next.js", "React", "TypeScript", "TailwindCSS", "Framer Motion"],
+    outcome: "A living portfolio that matches my current role: full-stack developer in London, finishing a BSc in IT at Middlesex.",
+    images: ["https://placehold.co/1200x750/0d0d0d/FF5733/png?text=Portfolio+site"],
+    github: "https://github.com/Enesi-s-Space/Enesi-s-Space.github.io",
+    liveSite: "https://enesi-s-space.github.io",
     type: "image"
   },
   {
-    title: "Store Management System",
-    subtitle: "Inventory & Sales Management Application",
-    goal: "Create a comprehensive system for managing store inventory, sales tracking, and employee management.",
-    role: "Developed the front end of the application with real-time updates.",
-    technologies: ["Html", "Css", "JavaScript", "Firebase"],
-    outcome: "Still in development",
-    images: ["/images/StoreSystem1.jpg"],
-    github: "https://github.com/Jedidiah5/storeManagementSystem",
+    title: "REST API + dashboard",
+    subtitle: "Full-stack product-style app",
+    goal: "A CRUD app with a documented API, persisted data, and a client dashboard for managing records securely.",
+    role: "Back end: routes, validation, and data layer. Front end: auth flows, tables, and responsive layout.",
+    technologies: ["Node.js", "TypeScript", "Next.js", "Tailwind CSS", "PostgreSQL"],
+    outcome: "Replaced my older gallery with this line-up; replace this card with your repo, demo link, and screenshot when ready.",
+    images: ["https://placehold.co/1200x750/0d0d0d/FF5733/png?text=API+%2B+Dashboard"],
+    github: "https://github.com/Jedidiah5",
     type: "image"
   },
   {
-    title: "Auralis — Document Summarizer & Audio Converter",
-    subtitle: "AI-powered PDF Summarization & Text-to-Speech Web App",
-    goal: "Create a web application that summarizes PDF documents and converts the summaries into downloadable audio files. The app also aims to support full document-to-audio conversion.",
-    role: "Designed and developed the front end using React and integrated AI-powered summarization and text-to-speech functionalities. ",
-    technologies: ["React", "JavaScript", "Tailwind CSS", "Firebase", "OpenAI API", "Text-to-Speech API"],
-    outcome: "Successfully built MVP with PDF upload, summary generation, and audio conversion. Full document-to-audio feature is in progress.",
-    images: ["/images/Auralis.png"], 
-    github: "https://github.com/Jedidiah5/Auralis",
+    title: "Capstone / final-year build",
+    subtitle: "End-to-end university project",
+    goal: "Deliver a scoped IT system that maps to degree outcomes: requirements, build, test, and deployment story.",
+    role: "Full-stack ownership: architecture, implementation, and documentation for hand-in and demo.",
+    technologies: ["Next.js", "TypeScript", "Node.js", "Prisma", "React"],
+    outcome: "Update this block with your actual module or dissertation title, stack, and outcomes.",
+    images: ["https://placehold.co/1200x750/0d0d0d/FF5733/png?text=Capstone+project"],
+    github: "https://github.com/Jedidiah5",
     type: "image"
   },
   {
-    title: "Clotify",
-    subtitle: "Clothing E-commerce Site",
-    goal: "Create a stylish online shop with cart, checkout, and admin dashboard.",
-    role: "Built complete frontend, handled cart logic, and made the site fully responsive.",
-    technologies: ["Next.js", "Redux", "TailwindCSS", "TypeScript"],
-    outcome: "Ready-to-launch shopping site for small businesses.",
-    images: ["/images/clotify2.png"],
-    github: "https://github.com/Jedidiah5/Clotify",
-    liveSite: "https://clotify.vercel.app/",
-    type: "image"
-  },
-  {
-    title: "Scriptify",
-    subtitle: "AI-Powered Short-Form Video Script Generator",
-    goal: "Helps generate video scripts for a given topic or niche",
-    role: "Designed and developed the full application",
-    technologies: ["TypeScript", "NextJS", "Tailwind CSS", "Genkit", "Gemini", "Vercel"],
-    outcome: "Succesull able to generate video scripts.",
-    images: ["/images/scriptify.png"],
-    github: "https://github.com/Jedidiah5/Scriptify",
-    liveSite: "https://scriptify-jedidiah5s-projects.vercel.app/",
-    type: "image"
-  },
-  {
-    title: "Whispr",
-    subtitle: "Ai powered audio journal",
-    goal: "Used to keep detailed entries of your day",
-    role: "Designed and developed the full application",
-    technologies: ["React", "TailwindCSS", "Firebase", "Next.js", "OpenAI", "Vercel"],
-    outcome: "Succesull able to store users journal entries.",
-    images: ["/images/whispr.png"],
-    github: "https://github.com/Jedidiah5/Whispr",
-    liveSite: "https://whispr-jedidiah5s-projects.vercel.app/",
-    type: "image"
-  },
-  {
-    title: "3D page",
-    subtitle: "Interactive 3D page",
-    goal: "Create an immersive 3D page showcasing 3D models",
-    role: "Developed the entire application using Three.js and React Three Fiber.",
-    technologies: ["Three.js", "React Three Fiber", "React", "TailwindCSS"],
-    outcome: "Unique and engaging portfolio that stands out from traditional websites.",
-    images: ["/images/3Dpage.png"],
-    github: "https://github.com/Jedidiah5/3D-Page",
-    liveSite: "https://3-d-page-three.vercel.app/",
-    type: "image"
-  },
-  {
-    title: "ElevateBiz",
-    subtitle: "A modern business site template to build an online presence with customizable features.",
-    goal: "Create a  modern template for businessesto build an online presence with customizable features.",
-    role: "Built complete frontend.",
-    technologies: ["Next.js", "Typescript", "TailwindCSS", "React"],
-    outcome: "Already active on Vercel",
-    images: ["/images/elevatebiz.png"],
-    github: "https://github.com/Jedidiah5/ElevateBiz",
-    liveSite: "https://elevate-biz-omega.vercel.app/",
+    title: "Integration & automation",
+    subtitle: "Services, webhooks, or serverless",
+    goal: "Connect external providers (e-mail, storage, LLMs) with a small, observable service layer in production.",
+    role: "Wiring APIs, environment-based config, and error handling; optional UI for operators.",
+    technologies: ["TypeScript", "Node.js", "Vercel", "Tailwind CSS", "Next.js"],
+    outcome: "Swap in a real case study (what you built, what broke, what you’d do next) and a link to the live or repo.",
+    images: ["https://placehold.co/1200x750/0d0d0d/FF5733/png?text=Integrations"],
+    github: "https://github.com/Jedidiah5",
     type: "image"
   }
-
 ];
 
 const techIcons: { [key: string]: string } = {
-  "React": "ri-reactjs-line",
+  React: "ri-reactjs-line",
   "Next.js": "ri-nextjs-line",
-  "TailwindCSS": "ri-tailwind-css-fill",
-  "TypeScript": "ri-javascript-fill",
-  "JavaScript": "ri-javascript-fill",
-  "HTML": "ri-html5-line",
-  "CSS": "ri-css3-line",
-  "Firebase": "ri-firebase-line",
-  "Redux": "ri-redux-line",
-  "Three.js": "ri-3d-line",
+  TailwindCSS: "ri-tailwind-css-fill",
+  "Tailwind CSS": "ri-tailwind-css-fill",
+  TypeScript: "ri-javascript-fill",
+  JavaScript: "ri-javascript-fill",
+  "Node.js": "ri-nodejs-line",
+  HTML: "ri-html5-line",
+  CSS: "ri-css3-line",
+  Firebase: "ri-firebase-line",
+  PostgreSQL: "ri-database-2-line",
+  Prisma: "ri-database-2-line",
+  Vercel: "ri-cloud-line",
   "Framer Motion": "ri-motion-line",
-  "Git": "ri-github-fill",
-  "Figma": "ri-figma-fill"
+  Git: "ri-github-fill",
+  Figma: "ri-figma-fill"
 };
 
 const Projects = () => {
-  const clotifyIndex = projects.findIndex(p => p.title === "Clotify");
-  const initialIndex = clotifyIndex !== -1 ? clotifyIndex : 0; // Default to 0 if not found
-
+  const initialIndex = 0;
   const [activeIndex, setActiveIndex] = useState(initialIndex);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const swiperRef = useRef<SwiperType>();

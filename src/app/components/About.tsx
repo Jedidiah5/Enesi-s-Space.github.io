@@ -4,14 +4,14 @@ import { motion } from 'framer-motion';
 
 const techSkills = [
   { name: "JavaScript", icon: "ri-javascript-fill" },
+  { name: "TypeScript", icon: "ri-javascript-fill" },
   { name: "React", icon: "ri-reactjs-line" },
   { name: "Next.js", icon: "ri-nextjs-line" },
-  { name: "TypeScript", icon: "ri-javascript-fill" },
+  { name: "Node.js", icon: "ri-nodejs-line" },
   { name: "TailwindCSS", icon: "ri-tailwind-css-fill" },
   { name: "HTML5", icon: "ri-html5-line" },
   { name: "Git", icon: "ri-github-fill" },
-  { name: "Figma", icon: "ri-figma-fill" },
-  { name: "UI/UX", icon: "ri-palette-line" }
+  { name: "Figma", icon: "ri-figma-fill" }
 ];
 
 const About = () => {
@@ -41,19 +41,15 @@ const About = () => {
           >
             <div className="prose prose-invert">
               <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
-                Hi, I&apos;m  a passionate Front-End Developer and Software Engineer with a focus on building clean, responsive, and user-focused web applications.
+                I&apos;m an undergraduate Information Technology student at <span className="text-white font-medium">Middlesex University</span>, based in <span className="text-white font-medium">London, United Kingdom</span>, and I&apos;m approaching graduation. I work across the stack—frontend, backend, and databases—to ship reliable, well-designed products.
               </p>
               
               <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
-                With a background in software engineering and hands-on experience working with technologies like React, Next.js, JavaScript, and TailwindCSS, I specialize in turning design ideas into functional, high-performance websites.
+                I build with modern tools like React, Next.js, TypeScript, and Node, and I care about performance, security, and clear user experiences from API to interface.
               </p>
 
               <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
-                I&apos;m currently interning at Wish to Wear, and I&apos;m also actively building projects like an application to help creators post on different platforms at the same time and a mental health app. I enjoy solving problems, learning new tools, and delivering experiences that make users feel at home.
-              </p>
-
-              <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
-                When I&apos;m not coding, I&apos;m creating short stories for social media or designing content for my editing page.
+                I enjoy turning briefs and ideas into working software, learning new tools as the stack evolves, and collaborating with others on projects that are useful in the real world.
               </p>
             </div>
           </motion.div>
@@ -88,12 +84,12 @@ const About = () => {
               </h3>
               <div className="space-y-3 sm:space-y-4">
                 <div className="bg-custom-blue/10 rounded-lg p-3 sm:p-4 border border-custom-orange/20">
-                  <h4 className="text-custom-orange font-semibold mb-2 text-sm sm:text-base">HLS</h4>
-                  <p className="text-gray-400 text-sm sm:text-base">Working on a startup with a team as the front-end developer</p>
+                  <h4 className="text-custom-orange font-semibold mb-2 text-sm sm:text-base">Final year &amp; wrap-up</h4>
+                  <p className="text-gray-400 text-sm sm:text-base">Finishing my BSc IT degree at Middlesex, strengthening full-stack project work, and preparing for the next step after graduation.</p>
                 </div>
                 <div className="bg-custom-blue/10 rounded-lg p-3 sm:p-4 border border-custom-orange/20">
-                  <h4 className="text-custom-orange font-semibold mb-2 text-sm sm:text-base">Personal Projects</h4>
-                  <p className="text-gray-400 text-sm sm:text-base">Working on a react native app to build my knowledge on react-native</p>
+                  <h4 className="text-custom-orange font-semibold mb-2 text-sm sm:text-base">London, UK</h4>
+                  <p className="text-gray-400 text-sm sm:text-base">Open to full-stack and software roles where I can keep building products end to end and grow with a strong team.</p>
                 </div>
               </div>
             </div>
